@@ -3,7 +3,7 @@ app.py  —  Bank Customer Churn Intelligence Platform
 Run:  streamlit run app.py
 """
 
-import json, warnings
+import json, warnings, os, subprocess, sys
 import numpy as np
 import pandas as pd
 import streamlit as st
@@ -14,6 +14,30 @@ import joblib
 from pathlib import Path
 
 warnings.filterwarnings("ignore")
+
+# ── Auto-train models if not present ─────────────────────────────────────────
+def auto_train():
+    models_needed = [
+        "models/gradient_boosting.pkl",
+        "models/random_forest.pkl",
+        "models/logistic_regression.pkl",
+        "models/decision_tree.pkl",
+        "models/metrics.json",
+        "models/feature_cols.json",
+    ]
+    if not all(Path(m).exists() for m in models_needed):
+        with st.spinner("🔧 First-time setup: training models on your data... (this takes 1-2 minutes)"):
+            result = subprocess.run(
+                [sys.executable, "train_models.py"],
+                capture_output=True, text=True
+            )
+            if result.returncode != 0:
+                st.error(f"Model training failed: {result.stderr}")
+                st.stop()
+            st.success("✓ Models trained successfully! Loading dashboard...")
+            st.rerun()
+
+auto_train()
 
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
