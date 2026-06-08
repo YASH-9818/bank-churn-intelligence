@@ -1,0 +1,17 @@
+{
+  "Age": 0.3551,
+  "SeniorCustomer": 0.1609,
+  "AgeTenureInteraction": 0.0799,
+  "EstimatedSalary": 0.0514,
+  "CreditScore": 0.0507,
+  "NumOfProducts": 0.0441,
+  "Balance": 0.0418,
+  "BalanceToSalary": 0.0381,
+  "ProductDensity": 0.038,
+  "Tenure": 0.0342,
+  "EngagementProduct": 0.0297,
+  "IsActiveMember": 0.0214,
+  "Geography_Germany": 0.0148,
+  "Geography_France": 0.0092,
+  "Gender_Male": 0.0084
+}
